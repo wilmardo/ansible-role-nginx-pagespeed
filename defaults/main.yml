@@ -1,0 +1,7 @@
+---
+nginx_packages:
+  - nginx-module-nps
+  - nginx-module-headers-more
+  - nginx-module-nbr
+
+nginx_brotli_cmd: no

@@ -1,0 +1,49 @@
+---
+- name: INSTALL | Install extrapagespeed repo
+  yum:
+    name: https://extras.getpagespeed.com/redhat/7/noarch/RPMS/getpagespeed-extras-7-0.el7.gps.noarch.rpm
+    state: present
+
+- name: INSTALL | Install packages
+  yum:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items: "{{ nginx_packages }}"
+
+- name: INSTALL | Enable modules in nginx.conf
+  lineinfile:
+    path: /etc/nginx/nginx.conf
+    line: "{{ item.line }}"
+    regexp: "{{ item.regex }}"
+    state: present
+    insertbefore: "^events {"
+  with_items:
+    - line: load_module modules/ngx_pagespeed.so;
+      regex: "^load_module modules/ngx_pagespeed.so;"
+    - line: load_module modules/ngx_http_brotli_filter_module.so;
+      regex: "^load_module modules/ngx_http_brotli_filter_module.so;"
+    - line: load_module modules/ngx_http_brotli_static_module.so;
+      regex: "^load_module modules/ngx_http_brotli_static_module.so;"
+    - line: load_module modules/ngx_http_headers_more_filter_module.so;
+      regex: "^load_module modules/ngx_http_headers_more_filter_module.so;"
+  notify: validate nginx configuration
+
+- name: NGINX | Enable brotli in nginx.conf
+  lineinfile:
+    path: /etc/nginx/nginx.conf
+    line: "{{ item.line }}"
+    regexp: "{{ item.regex }}"
+    state: present
+    insertafter: "^http {"
+  with_items:
+    - line: brotli on;
+      regex: "^brotli "
+    - line: brotli_static on;
+      regex: "^brotli_static "
+    - line: brotli_types *;
+      regex: "^brotli_types s"
+  notify: validate nginx configuration
+
+#TODO add posiblilty for cron job when install_brotli yes and setup_cron yes
+# https://afasterweb.com/2016/03/15/serving-up-brotli-with-nginx-and-jekyll/

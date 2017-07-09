@@ -1,0 +1,31 @@
+galaxy_info:
+  author: Wilmar den Ouden
+  description:
+
+  license: BSD
+  min_ansible_version: 1.2
+
+  platforms:
+    - name: EL
+      versions:
+      - 6
+      - 7
+    - name: Debian
+      versions:
+      - all
+    - name: Ubuntu
+      versions:
+      - all
+    - name: FreeBSD
+      versions:
+      - 10.3
+      - 10.2
+      - 10.1
+      - 10.0
+      - 9.3
+
+  galaxy_tags:
+    - web
+    - nginx
+    - pagespeed
+    - webserver

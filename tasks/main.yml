@@ -1,0 +1,7 @@
+---
+# Install tasks
+- include: install.yml
+
+- debug:
+    msg: "restart nginx"
+  notify: nginx restart
