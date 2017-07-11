@@ -1,4 +1,4 @@
-Optimized Nginx [![Build Status](https://travis-ci.org/wilmardo/ansible-nginx.svg?branch=master)](https://travis-ci.org/wilmardo/ansible-nginx)
+Optimized Nginx [![Build Status](https://travis-ci.org/wilmardo/ansible-role-nginx-pagespeed.svg?branch=master)](https://travis-ci.org/wilmardo/ansible-role-nginx-pagespeed)
 =========
 
 Nginx server compiled from source with the pagespeed module.
