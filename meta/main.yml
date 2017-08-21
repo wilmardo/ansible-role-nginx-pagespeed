@@ -24,6 +24,9 @@ galaxy_info:
       - 10.0
       - 9.3
 
+  dependencies:
+    - src: geerlingguy.nginx
+
   galaxy_tags:
     - web
     - nginx
