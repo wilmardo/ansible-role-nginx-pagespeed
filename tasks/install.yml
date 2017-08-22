@@ -1,8 +1,15 @@
 ---
-- name: INSTALL | Install extrapagespeed repo
+- name: INSTALL | Install extrapagespeed repo (Centos >=7)
   yum:
     name: https://extras.getpagespeed.com/redhat/7/noarch/RPMS/getpagespeed-extras-7-0.el7.gps.noarch.rpm
     state: present
+  when: ansible_distribution_major_version|int >= 7
+
+- name: INSTALL | Install extrapagespeed repo (Centos <7)
+  yum:
+    name: http://extras.getpagespeed.com/redhat/7/noarch/RPMS/getpagespeed-extras-7-0.el7.gps.noarch.rpm
+    state: present
+  when: ansible_distribution_major_version|int < 7
 
 - name: INSTALL | Install packages
   yum:
