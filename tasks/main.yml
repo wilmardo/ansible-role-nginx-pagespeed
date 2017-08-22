@@ -1,4 +1,15 @@
 ---
+# Install SSL packages for Centos 6
+- yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - python-urllib3
+    - python-pyOpenSSL
+    - python-ndg-httpsclient
+    - python-pyasn1
+  when: ansible_distribution_major_version|int < 7
+
 # Install tasks
 - include: install.yml
 
